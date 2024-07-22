@@ -1,0 +1,300 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/assets/styles/main_styles.css">
+
+<!-- Slider -->
+
+<style>
+    .main_slider_container {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: 100vh;
+    }
+
+    .main_slider {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .main_slider_item {
+        display: none;
+        height: 100%;
+        background-size: cover;
+        background-position: center center;
+        position: absolute;
+        width: 100%;
+    }
+
+    .slider_pagination {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+    }
+
+    .dot {
+        width: 15px;
+        height: 15px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .dot.active, .dot:hover {
+            background-color: #00ffff;
+        }
+
+    .red_button {
+        display: inline-block;
+        background: #f00;
+        color: #fff;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background 0.3s ease-in-out;
+    }
+
+        .red_button:hover {
+            background: #c00;
+        }
+
+    .red_button {
+        display: inline-block;
+        background: #f00;
+        color: #fff;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background 0.3s ease-in-out;
+        text-align: center; /* Căn giữa chữ theo chiều ngang */
+        line-height: 1.5; /* Đảm bảo chữ được căn giữa theo chiều dọc */
+        vertical-align: middle; /* Đảm bảo chữ được căn giữa theo chiều dọc */
+    }
+
+        .red_button a {
+            color: #fff; /* Đảm bảo chữ có màu trắng */
+            text-decoration: none; /* Loại bỏ gạch chân */
+            display: inline-block; /* Đảm bảo rằng phần tử a là inline-block để có thể căn giữa */
+            width: 100%; /* Đảm bảo phần tử a chiếm toàn bộ không gian của button */
+            height: 100%; /* Đảm bảo phần tử a chiếm toàn bộ không gian của button */
+            line-height: inherit; /* Sử dụng cùng line-height như button để căn giữa theo chiều dọc */
+        }
+
+        .red_button:hover {
+            background: #c00;
+        }
+</style>
+
+<div class="main_slider_container">
+    <div class="main_slider">
+        <div class="main_slider_item" style="background-image: url('/Content/assets/images/slider_1.jpg')">
+            <div class="container fill_height">
+                <div class="row align-items-center fill_height">
+                    <div class="col">
+                        <div class="main_slider_content">
+                            <h5>Autumn / Winter Collection 2024</h5>
+                            <h1>Get up to 30% Off New Arrivals</h1>
+                            <div class="red_button shop_now_button"><a href="/san-pham">Shop Now</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main_slider_item" style="background-image: url('/Content/assets/images/Spring_Summer.jpg')">
+            @*<div class="container fill_height">
+                    <div class="row align-items-center fill_height">
+                        <div class="col">
+                            <div class="main_slider_content">
+                                <h5>Spring / Summer Collection 2024</h5>
+                                <h2>Get up to 40% Off New Arrivals</h2>
+                                <div class="red_button shop_now_button"><a href="/san-pham">Shop Now</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+        <div class="main_slider_item" style="background-image: url('/Content/assets/images/chang_bat_phong_cach.jpg')">
+            @*<div class="container fill_height">
+                    <div class="row align-items-center fill_height">
+                        <div class="col">
+                            <div class="main_slider_content">
+                                <h6>Spring / Summer Collection 2018</h6>
+                                <h1>Get up to 50% Off New Arrivals</h1>
+                                <div class="red_button shop_now_button"><a href="/san-pham">shop now</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+        <div class="main_slider_item" style="background-image: url('/Content/assets/images/ron_rang_thang4.png')">
+
+        </div>
+    </div>
+    <!-- Pagination Dots -->
+    <div class="slider_pagination">
+        <span class="dot" data-index="0"></span>
+        <span class="dot" data-index="1"></span>
+        <span class="dot" data-index="2"></span>
+        <span class="dot" data-index="3"></span>
+    </div>
+</div>
+
+<!-- Banner/MenuProductCategory -->
+@Html.Action("MenuProductCategory", "Menu")
+
+<!-- New Arrivals -->
+<div class="new_arrivals">
+    <div class="container">
+        @Html.Action("MenuArrivals", "Menu")
+    </div>
+</div>
+
+<!-- Deal of the week -->
+
+<div class="deal_ofthe_week">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="deal_ofthe_week_img">
+                    <img src="~/Content/assets/images/deal_ofthe_week.png" alt="">
+                </div>
+            </div>
+            <div class="col-lg-6 text-right deal_ofthe_week_col">
+                <div class="deal_ofthe_week_content d-flex flex-column align-items-center float-right">
+                    <div class="section_title">
+                        <h2>Deal Of The Week</h2>
+                    </div>
+                    <ul class="timer">
+                        <li class="d-inline-flex flex-column justify-content-center align-items-center">
+                            <div id="day" class="timer_num">7</div>
+                            <div class="timer_unit">Day</div>
+                        </li>
+                        <li class="d-inline-flex flex-column justify-content-center align-items-center">
+                            <div id="hour" class="timer_num">0</div>
+                            <div class="timer_unit">Hours</div>
+                        </li>
+                        <li class="d-inline-flex flex-column justify-content-center align-items-center">
+                            <div id="minute" class="timer_num">0</div>
+                            <div class="timer_unit">Mins</div>
+                        </li>
+                        <li class="d-inline-flex flex-column justify-content-center align-items-center">
+                            <div id="second" class="timer_num">0</div>
+                            <div class="timer_unit">Sec</div>
+                        </li>
+                    </ul>
+                    @*<div class="red_button deal_ofthe_week_button"><a href="/san-pham">shop now</a></div>*@
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <!--Product Feature-->
+                @Html.Action("Partial_FeatureProducts", "Products")
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Best Sellers -->
+
+@Html.Action("Partial_ProductSales", "Products")
+
+<!-- Benefit -->
+
+<div class="benefit">
+    <div class="container">
+        <div class="row benefit_row">
+            <div class="col-lg-3 benefit_col">
+                <div class="benefit_item d-flex flex-row align-items-center">
+                    <div class="benefit_icon"><i class="fa fa-truck" aria-hidden="true"></i></div>
+                    <div class="benefit_content">
+                        <h6>free shipping</h6>
+                        <p>Suffered Alteration in Some Form</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 benefit_col">
+                <div class="benefit_item d-flex flex-row align-items-center">
+                    <div class="benefit_icon"><i class="fa fa-money" aria-hidden="true"></i></div>
+                    <div class="benefit_content">
+                        <h6>cach on delivery</h6>
+                        <p>The Internet Tend To Repeat</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 benefit_col">
+                <div class="benefit_item d-flex flex-row align-items-center">
+                    <div class="benefit_icon"><i class="fa fa-undo" aria-hidden="true"></i></div>
+                    <div class="benefit_content">
+                        <h6>45 days return</h6>
+                        <p>Making it Look Like Readable</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 benefit_col">
+                <div class="benefit_item d-flex flex-row align-items-center">
+                    <div class="benefit_icon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
+                    <div class="benefit_content">
+                        <h6>opening all week</h6>
+                        <p>8AM - 09PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Blogs -->
+
+@Html.Action("Partial_News_Home", "News")
+
+@section scripts{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var $slider = $('.main_slider');
+            var $slides = $('.main_slider_item');
+            var $dots = $('.dot');
+            var currentIndex = 0;
+            var totalSlides = $slides.length;
+            var interval;
+
+            function showSlide(index) {
+                $slides.eq(currentIndex).fadeOut(300);
+                $dots.eq(currentIndex).removeClass('active');
+                currentIndex = index;
+                $slides.eq(currentIndex).fadeIn(300);
+                $dots.eq(currentIndex).addClass('active');
+            }
+
+            function showNextSlide() {
+                var nextIndex = (currentIndex + 1) % totalSlides;
+                showSlide(nextIndex);
+            }
+
+            $dots.click(function () {
+                clearInterval(interval);
+                var index = $(this).data('index');
+                showSlide(index);
+                startSlider();
+            });
+
+            function startSlider() {
+                interval = setInterval(showNextSlide, 4000); // Thời gian chuyển đổi là 3 giây
+            }
+
+            $slides.hide().eq(currentIndex).show();
+            $dots.eq(currentIndex).addClass('active');
+            startSlider();
+        });
+    </script>
+}
