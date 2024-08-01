@@ -1,6 +1,11 @@
 ﻿@model WebBanHangOnline.Models.EF.Order
 @{
     ViewBag.Title = "Chi tiết đơn hàng";
+    var paymentMethods = new Dictionary<int, string>
+    {
+        { 1, "COD" },
+        { 2, "Chuyển khoản" }
+    };
 }
 
 @section naviheader{
@@ -87,7 +92,10 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Phương thức thanh toán</label>
-                        <p class="form-control">@Model.TypePayment</p>
+                        @*<p class="form-control">@Model.TypePayment.ToString()</p>*@
+                        <p class="form-control">
+                            @(paymentMethods.ContainsKey(Model.TypePayment) ? paymentMethods[Model.TypePayment] : "Unknown")
+                        </p>
                     </div>
                 </div>
             </div>

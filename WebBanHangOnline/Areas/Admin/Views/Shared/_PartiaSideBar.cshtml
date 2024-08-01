@@ -15,8 +15,9 @@
     .user-panel .info p {
         color: white; /* Đổi màu chữ thành trắng */
     }
+
     .info {
-        margin-left:inherit;
+        margin-left: inherit;
     }
 </style>
 
@@ -52,7 +53,16 @@
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
-            with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
+            <li class="nav-item">
+                <a href="/admin/home" class="nav-link">
+                    <i class="fa-solid fa-house"></i>
+                    <p>
+                        Home
+                        @*<span class="right badge badge-danger">New</span>*@
+                    </p>
+                </a>
+            </li>
             <li class="nav-item">
                 <a href="/admin/category" class="nav-link">
                     @*<i class="nav-icon fas fa-th"></i>*@
@@ -63,25 +73,25 @@
                     </p>
                 </a>
                 @*<ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="~/content/clients/index.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>dashboard v1</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="~/content/clients/index2.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>dashboard v2</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="~/content/clients/index3.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>dashboard v3</p>
-                            </a>
-                        </li>
-                    </ul>*@
+                <li class="nav-item">
+                    <a href="~/content/clients/index.html" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>dashboard v1</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/content/clients/index2.html" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>dashboard v2</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/content/clients/index3.html" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>dashboard v3</p>
+                    </a>
+                </li>
+                </ul>*@
             </li>
             <li class="nav-item">
                 <a href="/admin/role" class="nav-link">
@@ -162,6 +172,15 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="/admin/statistical" class="nav-link">
+                    <i class="fa-solid fa-chart-simple"></i>
+                    <p>
+                        Thống kê doanh thu
+                        @*<span class="right badge badge-danger">New</span>*@
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="/admin/SettingSystem" class="nav-link">
                     <i class="fa-solid fa-gears"></i>
                     <p>
@@ -171,14 +190,14 @@
                 </a>
             </li>
             <!--<li class="nav-item">
-                <a href="javascript:document.getElementById('logOffForm').submit()" class="nav-link">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <p>
-                        Đăng xuất-->
+    <a href="javascript:document.getElementById('logOffForm').submit()" class="nav-link">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <p>
+            Đăng xuất-->
             @*<span class="right badge badge-danger">New</span>*@
             <!--</p>
-                </a>
-            </li>-->
+        </a>
+    </li>-->
         </ul>
     </nav>
     <!-- /.sidebar-menu -->

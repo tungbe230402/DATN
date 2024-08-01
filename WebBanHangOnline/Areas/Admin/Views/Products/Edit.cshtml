@@ -107,7 +107,7 @@
                                             </div>
                                             <div class="col-4">
                                                 <div class="form-group">
-                                                    <label for="Color">Màu sắc</label>
+                                                    <label for="Color">Size</label>
                                                     @Html.TextBoxFor(x => x.SizesString, new { @class = "form-control", @placeholder = "Nhập các size, cách nhau bởi dấu phẩy", required = "required" })
                                                     @Html.ValidationMessageFor(x => x.SizesString, null, new { @class = "text-danger" })
                                                 </div>
@@ -116,7 +116,15 @@
                                         <div class="row">
                                             <div class="col-4">
                                                 <div class="form-group">
-                                                    <label for="Price">Giá</label>
+                                                    <label for="Price">Giá nhập</label>
+                                                    <input type="text" name="demoOriginalPrice" id="demoOriginalPrice" value="@Model.OriginalPrice" class="form-control auto" data-a-dec="," data-a-sep=".">
+                                                    @Html.HiddenFor(x => x.OriginalPrice)
+                                                    @Html.ValidationMessageFor(x => x.OriginalPrice, null, new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="Price">Giá bán</label>
                                                     <input type="text" name="demoPrice" id="demoPrice" value="@Model.Price" class="form-control auto" data-a-dec="," data-a-sep=".">
                                                     @Html.HiddenFor(x => x.Price)
                                                     @Html.ValidationMessageFor(x => x.Price, null, new { @class = "text-danger" })
@@ -229,6 +237,11 @@
                 var demoGet = $('#demoPriceSale').autoNumeric('get');
                 $('#PriceSale').val(demoGet);
                 $('#PriceSale').autoNumeric('set', demoGet);
+            });
+            $('#demoOriginalPrice').bind('blur focusout keypress keyup', function () {
+                var demoGet = $('#demoOriginalPrice').autoNumeric('get');
+                $('#OriginalPrice').val(demoGet);
+                $('#OriginalPrice').autoNumeric('set', demoGet);
             });
 
             CKEDITOR.replace('txtDetail', {

@@ -144,3 +144,4 @@ C:\Users\DELL\Desktop\demoWeb\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBan
 C:\Users\DELL\Desktop\demoWeb\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.UpdateReviewProduct.resources
 C:\Users\DELL\Desktop\demoWeb\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.UpdatePayment2.resources
 C:\Users\DELL\Desktop\demoWeb\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.UpdateOrder.resources
+C:\Users\DELL\Desktop\demoWeb\WebBanHangOnline\WebBanHangOnline\obj\Debug\WebBanHangOnline.Migrations.UpdateOriginalPrice.resources
