@@ -1,4 +1,5 @@
 ﻿using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -12,10 +13,49 @@ using WebBanHangOnline.Models.Payments;
 
 namespace WebBanHangOnline.Controllers
 {
+    [Authorize]
     public class ShoppingCartController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
+
+        public ShoppingCartController()
+        {
+        }
+
+        public ShoppingCartController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
+
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
         // GET: ShoppingCart 
+        [AllowAnonymous]
         public ActionResult Index()
         {
             //Giỏ hàng
@@ -88,6 +128,7 @@ namespace WebBanHangOnline.Controllers
 
         //Chỉ hiển thị thông tin form thanh toán (gồm thông tin khách hàng & sản phẩm thanh toán)
         // -- Có jsShopping bên Scripts
+        [AllowAnonymous]
         public ActionResult CheckOut()
         {
             ShoppingCart cart = (ShoppingCart)Session["Cart"];
@@ -98,12 +139,14 @@ namespace WebBanHangOnline.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult CheckOutSuccess()
         {
             return View();
         }
 
         //Hiển thị thông tin các sản phẩm cần thanh toán
+        [AllowAnonymous]
         public ActionResult Partial_Item_ThanhToan()
         {
             ShoppingCart cart = (ShoppingCart)Session["Cart"];
@@ -115,6 +158,7 @@ namespace WebBanHangOnline.Controllers
         }
 
         //Thông tin sản phẩm trong giỏ hàng
+        [AllowAnonymous]
         public ActionResult Partial_Item_Cart()
         {
             ShoppingCart cart = (ShoppingCart)Session["Cart"];
@@ -126,6 +170,7 @@ namespace WebBanHangOnline.Controllers
         }
 
         //Đếm số lượng sản phẩm trong giỏ hàng
+        [AllowAnonymous]
         public ActionResult ShowCount()
         {
             ShoppingCart cart = (ShoppingCart)Session["Cart"];
@@ -137,13 +182,20 @@ namespace WebBanHangOnline.Controllers
         }
 
         //Form thông tin thanh toán của khách hàng
+        [AllowAnonymous]
         public ActionResult Partial_CheckOut()
         {
+            var user = UserManager.FindByNameAsync(User.Identity.Name).Result;
+            if (user != null)
+            {
+                ViewBag.User = user;
+            }
             return PartialView();
         }
 
         //Xử lý các thông tin khách hàng nhập khi thanh toán
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult CheckOut(OrderViewModel req)
         {
@@ -231,6 +283,7 @@ namespace WebBanHangOnline.Controllers
             return Json(code);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult AddToCart(int id, int quantity, string color, string size)
         {
@@ -269,6 +322,7 @@ namespace WebBanHangOnline.Controllers
             return Json(code);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult Update(int id, string color, string size, int quantity)
         {
@@ -282,6 +336,7 @@ namespace WebBanHangOnline.Controllers
             return Json(new { Success = false });
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult Delete(int id, string color, string size)
         {
@@ -299,6 +354,7 @@ namespace WebBanHangOnline.Controllers
             return Json(code);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult DeleteAll()
         {

@@ -46,5 +46,11 @@ namespace WebBanHangOnline.Controllers
 
             return View();
         }
+
+        public ActionResult Search(string searchkey)
+        {
+            var items = db.Products.Where(x => x.Alias.Contains(searchkey) || x.Title.Contains(searchkey)).ToList();
+            return View("Search", items);
+        }
     }
 }

@@ -18,19 +18,15 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="~/Content/assets/dist/css/adminlte.min.css">
 </head>
-<body class="hold-transition login-page" style="background-color:lightcyan">
+<body class="hold-transition login-page" style="background-image: url('/Content/assets/dist/img/Admin_Background.jpg'); background-size: cover; background-position:center; background-repeat: no-repeat;">
     <div class="login-box">
         <!-- /.login-logo -->
-        <div class="card card-outline card-primary">
-            <div class="card-header text-center">
-                <a href="/admin" class="h1"><b>Admin</b></a>
-            </div>
-            <div class="card-body">
-                @RenderBody()
-            </div>
-            <!-- /.card-body -->
+        <div class="card-header text-center">
+            <a href="/admin/home" class="h2"><b>Admin</b></a>
         </div>
-        <!-- /.card -->
+        <div class="card-body">
+            @RenderBody()
+        </div>
     </div>
     <!-- /.login-box -->
     <!-- jQuery -->
@@ -41,3 +37,16 @@
     <script src="~/Content/assets/dist/js/adminlte.min.js"></script>
 </body>
 </html>
+
+<style>
+    .login-box {
+        background-color: rgba(255, 255, 255, 0.2); /* Màu nền trắng với độ trong suốt */
+        border-radius: 8px; /* Bo góc cho hộp */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Khung mờ với bóng nhẹ */
+        padding: 20px;
+    }
+    .card {
+        background-color: transparent; /* Đảm bảo bên trong card cũng trong suốt */
+        border: none; /* Loại bỏ viền nếu có */
+    }
+</style>

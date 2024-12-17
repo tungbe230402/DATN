@@ -1,5 +1,13 @@
 ﻿@model IEnumerable<WebBanHangOnline.Models.EF.ProductCategory>
 
+<style>
+    .product-item {
+        margin-bottom: 30px; /* Khoảng cách giữa các sản phẩm */
+        margin-right: 10px; /* Khoảng cách bên phải giữa các sản phẩm cùng hàng */
+        width: 19%;
+    }
+</style>
+
 @if (Model != null && Model.Any())
 {
     <div class="row">
@@ -18,8 +26,6 @@
                     {
                         <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".@item.Alias">@item.Title</li>
                     }
-                    @*<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".accessories">accessories</li>
-                    <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".men">men's</li>*@
                 </ul>
             </div>
         </div>

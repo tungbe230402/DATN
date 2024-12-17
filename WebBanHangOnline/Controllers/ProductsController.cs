@@ -15,7 +15,7 @@ namespace WebBanHangOnline.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
-            var items = db.Products.ToList();
+            var items = db.Products.Where(x => x.IsActive).ToList();
             return View(items);
         }
 
@@ -45,7 +45,7 @@ namespace WebBanHangOnline.Controllers
 
         public ActionResult Partial_ItemsByCateId()
         {
-            var items = db.Products.Where(x => x.IsHome && x.IsActive).Take(30).ToList();
+            var items = db.Products.Where(x => x.IsNew && x.IsActive && x.IsHome).Take(30).ToList();
             return PartialView(items);
         }
 

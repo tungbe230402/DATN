@@ -20,7 +20,7 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
         public ActionResult Index(int? page)
         {
 
-            IEnumerable<Product> items = db.Products.OrderByDescending(x => x.Id);
+            IEnumerable<Product> items = db.Products.OrderBy(x => x.ProductCategoryId).ThenByDescending(x => x.CreatedDate);
             var pageSize = 10;
             if (page == null)
             {
@@ -39,7 +39,10 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
             var model = new Product
             {
                 SizesString = string.Empty, // Khởi tạo thuộc tính SizesString
-                ColorsString = string.Empty // Khởi tạo thuộc tính ColorsString
+                ColorsString = string.Empty, // Khởi tạo thuộc tính ColorsString
+                IsActive = true,
+                IsNew = true,
+                IsHome = true,
             };
             return View(model);
         }
@@ -208,6 +211,20 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
                 db.Entry(item).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return Json(new { success = true, isHome = item.IsHome });
+            }
+            return Json(new { success = false });
+        }
+
+        [HttpPost]
+        public ActionResult IsNew(int id)
+        {
+            var item = db.Products.Find(id);
+            if (item != null)
+            {
+                item.IsNew = !item.IsNew;
+                db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return Json(new { success = true, isNew = item.IsNew });
             }
             return Json(new { success = false });
         }

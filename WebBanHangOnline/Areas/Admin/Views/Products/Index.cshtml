@@ -78,6 +78,7 @@
                         <th>Ngày tạo</th>
                         <th>Hiển thị</th>
                         <th>Home</th>
+                        <th>New</th>
                         <th>Nổi bật</th>
                         <th>Sale</th>
 
@@ -92,6 +93,7 @@
                         {
                             var strCheckActive = item.IsActive ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
                             var strCheckHome = item.IsHome ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
+                            var strCheckNew = item.IsNew ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
                             var strCheckFeature = item.IsFeature ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
                             var strCheckSale = item.IsSale ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
                             var strImg = "";
@@ -118,6 +120,10 @@
                                 <!--IsHome-->
                                 <td>
                                     <a href="#" data-id="@item.Id" class="btnHome">@Html.Raw(strCheckHome)</a>
+                                </td>
+                                <!--IsNew-->
+                                <td>
+                                    <a href="#" data-id="@item.Id" class="btnNew">@Html.Raw(strCheckNew)</a>
                                 </td>
                                 <!--IsFeature-->
                                 <td>
@@ -307,6 +313,27 @@
                     success: function (rs) {
                         if (rs.success) {
                             if (rs.isHome) {
+                                btn.html("<i class='fa fa-check text-success'></i>");
+                            }
+                            else {
+                                btn.html("<i class='fas fa-times text-danger'></i>");
+                            }
+                        }
+                    }
+                });
+            });
+
+            $('body').on('click', '.btnNew', function (e) {
+                e.preventDefault();// Ngăn chặn hành vi mặc định của thẻ <a>
+                var btn = $(this);
+                var id = btn.data("id");
+                $.ajax({
+                    url: '/admin/products/IsNew',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (rs) {
+                        if (rs.success) {
+                            if (rs.isNew) {
                                 btn.html("<i class='fa fa-check text-success'></i>");
                             }
                             else {

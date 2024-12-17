@@ -1008,7 +1008,7 @@ section
 .product-item
 {
 	width: 20%;
-	height: 380px;
+	height: 382px;
 	cursor: pointer;
 }
 .product-item::after
@@ -1056,7 +1056,7 @@ section
 }
 .product_name
 {
-	margin-top: 27px;
+	margin-top: 5px;
 }
 .product_name a
 {
@@ -1304,7 +1304,7 @@ section
 .product_slider_container
 {
 	width: 100%;
-	height: 340px;
+	height: 412px;
 	margin-top: 73px;
 }
 .product_slider_container::after

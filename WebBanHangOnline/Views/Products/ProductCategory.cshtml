@@ -6,6 +6,13 @@
 <link rel="stylesheet" type="text/css" href="~/Content/assets/styles/categories_styles.css">
 <link rel="stylesheet" type="text/css" href="~/Content/assets/styles/categories_responsive.css">
 
+<style>
+    .product-item {
+        margin-bottom: 30px; /* Khoảng cách giữa các sản phẩm */
+        margin-right: 20px; /* Khoảng cách bên phải giữa các sản phẩm cùng hàng */
+        width: 22%;
+    }
+</style>
 
 <div class="container product_section_container">
     <div class="row">
@@ -14,7 +21,7 @@
 
             <div class="breadcrumbs d-flex flex-row align-items-center">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li class="active">
                         <a href=""><i class="fa fa-angle-right" aria-hidden="true"></i>@ViewBag.CateName</a>
                     </li>

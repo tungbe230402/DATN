@@ -1,0 +1,172 @@
+﻿@model WebBanHangOnline.Models.EF.Order
+@{
+    ViewBag.Title = "Chi tiết đơn hàng";
+    var paymentMethods = new Dictionary<int, string>
+{
+        { 1, "COD" },
+        { 2, "Chuyển khoản" }
+    };
+}
+<link rel="stylesheet" type="text/css" href="~/Content/assets/styles/main_styles.css">
+
+<style>
+    /* Đảm bảo body có đủ khoảng cách so với header */
+    body {
+        margin: 0;
+        padding-top: 70px; /* Điều chỉnh giá trị này để phù hợp với chiều cao của header */
+        box-sizing: border-box;
+    }
+
+    /* Đảm bảo bảng được căn chỉnh đúng */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background-color: #fff;
+    }
+
+        .table th, .table td {
+            text-align: left;
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+    .card {
+        margin: 100px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header, .card-footer {
+        background-color: #f7f7f7;
+        padding: 15px;
+        border-bottom: 1px solid #ddd;
+        border-top: 1px solid #ddd;
+    }
+
+    .card-title {
+        margin: 0;
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    .card-body {
+        padding: 15px;
+        overflow-x: auto; /* Đảm bảo bảng không bị tràn trên thiết bị nhỏ */
+    }
+</style>
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Chi tiết đơn hàng</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Mã đơn hàng</label>
+                    <p class="form-control">@Model.Code</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Họ tên khách hàng</label>
+                    <p class="form-control">@Model.CustomerName</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Số điện thoại</label>
+                    <p class="form-control">@Model.Phone</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Địa chỉ</label>
+                    <p class="form-control">@Model.Address</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Tổng tiền</label>
+                    <p class="form-control">@WebBanHangOnline.Common.Common.FormatNumber(Model.TotalAmount)</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Email</label>
+                    <p class="form-control">@Model.Email</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Ngày tạo</label>
+                    <p class="form-control">@Model.CreatedDate.ToString("dd/MM/yyyy -- HH:mm tt")</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Phương thức thanh toán</label>
+                    @*<p class="form-control">@Model.TypePayment.ToString()</p>*@
+                    <p class="form-control">
+                        @(paymentMethods.ContainsKey(Model.TypePayment) ? paymentMethods[Model.TypePayment] : "Unknown")
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Danh sách sản phẩm</h2>
+            </div>
+            @if (Model != null)
+            {
+                var i = 1;
+                <div class="col-md-12">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Sale</th>
+                                <th>Số lượng</th>
+                                <th>Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.OrderDetails)
+                            {
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@item.Product.Title</td>
+                                    <td>@item.Product.Price</td>
+                                    <td>@item.Product.PriceSale</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@WebBanHangOnline.Common.Common.FormatNumber(item.Price * item.Quantity)</td>
+                                </tr>
+                                i++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="text-right">
+                    <a href="/HistoryOrder/index" class="btn btn-group-sm btn-danger">Quay lại</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.card-body -->
+    <div class="card-footer">
+
+    </div>
+    <!-- /.card-footer-->
+</div>
+

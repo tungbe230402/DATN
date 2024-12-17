@@ -149,16 +149,16 @@
                                             </div>
                                             <div class="col-2">
                                                 <div class="custom-control custom-checkbox">
-                                                    @Html.CheckBoxFor(x => x.IsHome, new { @class = "custom-control-input", @id = "IsHomeCheckbox", @checked = "checked" })
+                                                    @Html.CheckBoxFor(x => x.IsHome, new { @class = "custom-control-input", @id = "IsHomeCheckbox" })
                                                     <label for="IsHomeCheckbox" class="custom-control-label">Home</label>
                                                 </div>
                                             </div>
-                                            @*<div class="col-2">
-                                                    <div class="custom-control custom-checkbox">
-                                                        @Html.CheckBoxFor(x => x.IsHot, new { @class = "custom-control-input", @id = "IsHotCheckbox" })
-                                                        <label for="IsHotCheckbox" class="custom-control-label">Hot</label>
-                                                    </div>
-                                                </div>*@
+                                            <div class="col-2">
+                                                <div class="custom-control custom-checkbox">
+                                                    @Html.CheckBoxFor(x => x.IsNew, new { @class = "custom-control-input", @id = "IsHotCheckbox", @checked = "checked" })
+                                                    <label for="IsNewCheckbox" class="custom-control-label">New</label>
+                                                </div>
+                                            </div>
                                             <div class="col-2">
                                                 <div class="custom-control custom-checkbox">
                                                     @Html.CheckBoxFor(x => x.IsFeature, new { @class = "custom-control-input", @id = "IsFeatureCheckbox" })
@@ -306,18 +306,18 @@
             var str = "";
             if (currentId == 1) {
                 str += `<tr class="text-center" id="trow_${currentId}">
-                                                            <td>${currentId}</td>
-                                                            <td><img width="80" src="${url}" /><input type='hidden' value=${url} name="Images"/></td>
-                                                            <td><input type="radio" name="rDefault" value="${currentId}" checked="checked" /></td>
-                                                            <td><a href="#" data-id="${currentId}" class="btn btn-sm btn-danger btnXoaAnh">Xóa</a></td>
-                                                        </tr>`;
+                                                                <td>${currentId}</td>
+                                                                <td><img width="80" src="${url}" /><input type='hidden' value=${url} name="Images"/></td>
+                                                                <td><input type="radio" name="rDefault" value="${currentId}" checked="checked" /></td>
+                                                                <td><a href="#" data-id="${currentId}" class="btn btn-sm btn-danger btnXoaAnh">Xóa</a></td>
+                                                            </tr>`;
             } else {
                 str += `<tr class="text-center" id="trow_${currentId}">
-                                                            <td>${currentId}</td>
-                                                            <td><img width="80" src="${url}" /><input type='hidden' value=${url} name="Images"/></td>
-                                                            <td><input type="radio" name="rDefault" value="${currentId}" /></td>
-                                                            <td><a href="#" data-id="${currentId}" class="btn btn-sm btn-danger btnXoaAnh">Xóa</a></td>
-                                                        </tr>`;
+                                                                <td>${currentId}</td>
+                                                                <td><img width="80" src="${url}" /><input type='hidden' value=${url} name="Images"/></td>
+                                                                <td><input type="radio" name="rDefault" value="${currentId}" /></td>
+                                                                <td><a href="#" data-id="${currentId}" class="btn btn-sm btn-danger btnXoaAnh">Xóa</a></td>
+                                                            </tr>`;
             }
 
             $('#tbHtml').append(str);

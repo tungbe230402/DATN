@@ -5,58 +5,105 @@
 }
 
 <p class="login-box-msg">Sign in to start your session</p>
-@*<form action="~/Content/assets/index3.html" method="post"></form>*@
 
 @using (Html.BeginForm("Login", "Account", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <div class="input-group mb-3">
         @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", @placeholder = "Tài khoản" })
-        <div class="input-group-append">
-            <div class="input-group-text">
-                <span class="fas fa-envelope"></span>
-            </div>
-        </div>
     </div>
+
     <div class="input-group mb-3">
-        @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @placeholder = "Mật khẩu" })
-        <div class="input-group-append">
-            <div class="input-group-text">
-                <span class="fas fa-lock"></span>
-            </div>
-        </div>
+        @Html.PasswordFor(x => x.Password, new { @class = "form-control", @placeholder = "Mật khẩu", @id = "passwordInput" })
+        <i class="fa-solid fa-eye" id="PasswordIcon" onclick="togglePasswordVisibility()"></i>
     </div>
-    <div class="row">
-        <div class="col-8">
+
+    <div class="group">
+        <div class="forget">
             <div class="icheck-primary">
-                @*<input type="checkbox" id="remember">*@
                 @Html.CheckBoxFor(x => x.RememberMe)
                 <label for="remember">
                     Remember Me
                 </label>
+                <a href="/admin/account/ForgotPassword">Forgot password</a>
             </div>
         </div>
-        <!-- /.col -->
-        <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-        </div>
-        <!-- /.col -->
     </div>
+    <button type="submit" class="btnSignIn">Log In</button>
 }
 
-@*<div class="social-auth-links text-center mt-2 mb-3">
-        <a href="#" class="btn btn-block btn-primary">
-            <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-        </a>
-        <a href="#" class="btn btn-block btn-danger">
-            <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-        </a>
-    </div>*@
-<!-- /.social-auth-links -->
+<script>
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("passwordInput");
+        var toggleIcon = document.getElementById("PasswordIcon");
 
-<p class="mb-1">
-    <a href="/admin/account/ForgotPassword">I forgot my password</a>
-</p>
-@*<p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
-</p>*@
+        // Kiểm tra loại input và thay đổi icon và kiểu hiển thị
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleIcon.classList.remove("fa-eye");
+            toggleIcon.classList.add("fa-eye-slash"); // Chuyển sang icon ẩn mật khẩu
+        } else {
+            passwordInput.type = "password";
+            toggleIcon.classList.remove("fa-eye-slash");
+            toggleIcon.classList.add("fa-eye"); // Chuyển về icon hiển thị mật khẩu
+        }
+    }
+</script>
+
+<style>
+    .btnSignIn {
+        background-color: #271930;
+        color: #ffffff;
+        font-weight: 600;
+        border: none;
+        padding: 20px 20px;
+        cursor: pointer;
+        border-radius: 25px;
+        font-size: 20px;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+        width: 100%;
+    }
+
+        .btnSignIn:hover {
+            color: #000000;
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #ffffff;
+        }
+
+    .forget {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 25px 0 35px 0;
+        color: #ffffff;
+    }
+
+        .forget a {
+            color: #ffffff;
+            text-decoration: none;
+            margin-left: 46px;
+        }
+
+    .input-group .form-control {
+        border-radius: 25px; /* Bo góc của input */
+        border: 2px solid #ccc; /* Đặt viền cho trường nhập */
+    }
+
+    /* Viền bo tròn cho container của input và icon */
+    .input-group {
+        display: flex;
+        align-items: center;
+        border-radius: 25px; /* Bo viền cho toàn bộ input và icon */
+        border: 2px solid #ccc;
+    }
+
+        .input-group input {
+            border-radius: 25px 0 0 25px; /* Bo góc cho phần input */
+        }
+
+        .input-group #PasswordIcon {
+            border-radius: 0 25px 25px 0; /* Bo góc cho phần icon */
+            padding: 0 10px; /* Đảm bảo icon không bị vướng vào viền */
+        }
+</style>

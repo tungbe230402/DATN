@@ -152,12 +152,12 @@
                                                     <label for="IsHomeCheckbox" class="custom-control-label">Home</label>
                                                 </div>
                                             </div>
-                                            @*<div class="col-2">
-                                                    <div class="custom-control custom-checkbox">
-                                                        @Html.CheckBoxFor(x => x.IsHot, new { @class = "custom-control-input", @id = "IsHotCheckbox" })
-                                                        <label for="IsHotCheckbox" class="custom-control-label">Hot</label>
-                                                    </div>
-                                                </div>*@
+                                            <div class="col-2">
+                                                <div class="custom-control custom-checkbox">
+                                                    @Html.CheckBoxFor(x => x.IsNew, new { @class = "custom-control-input", @id = "IsHotCheckbox", @checked = "checked" })
+                                                    <label for="IsNewCheckbox" class="custom-control-label">New</label>
+                                                </div>
+                                            </div>
                                             <div class="col-2">
                                                 <div class="custom-control custom-checkbox">
                                                     @Html.CheckBoxFor(x => x.IsFeature, new { @class = "custom-control-input", @id = "IsFeatureCheckbox" })

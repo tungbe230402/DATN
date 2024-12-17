@@ -17,6 +17,14 @@
     .product_slider_nav_right_feature {
         right: 0;
     }
+
+    .product_slider_item {
+        margin-left: 10px; /* Không có margin mặc định */
+    }
+
+    .owl-carousel .owl-item {
+        display: flex; /* Giúp sản phẩm căn chỉnh đúng */
+    }
 </style>
 
 @if (Model != null && Model.Any())
@@ -27,7 +35,7 @@
             <div class="row">
                 <div class="col text-center">
                     <div class="section_title new_arrivals_title">
-                        <h3>Feature Products</h3>
+                        <h2>Feature Products</h2>
                     </div>
                 </div>
             </div>
@@ -35,7 +43,6 @@
                 <div class="col">
                     <div class="product_slider_container">
                         <div class="owl-carousel owl-theme product_slider">
-
                             @foreach (var item in Model)
                             {
                                 var strImg = "";
@@ -57,7 +64,7 @@
                                             <div class="product_image">
                                                 <img src="@strImg" alt="@item.Title">
                                             </div>
-
+                                            <!--Code yêu thích-->
                                             @if (isWishlist == true)
                                             {
                                                 <div data-id="@item.Id" class="favorite favorite_left active"></div>
@@ -66,15 +73,12 @@
                                             {
                                                 <div data-id="@item.Id" class="favorite favorite_left"></div>
                                             }
-
+                                            <!--Code giá-->
                                             @if (item.PriceSale > 0)
                                             {
                                                 <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>Sale</span></div>
+
                                             }
-                                            @*else
-                                                {
-                                                    <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center" style="white-space: nowrap; min-width: 130px;"><span>Đang cập nhật giá</span></div>
-                                                }*@
                                             <div class="product_info">
                                                 <h6 class="product_name"><a href="/chi-tiet-san-pham/@(item.Alias)-p@(item.Id)">@item.Title</a></h6>
                                                 @if (item.PriceSale == null || item.PriceSale == 0)
@@ -88,10 +92,10 @@
                                                     <div style="display:none;" class="in_product_price">@item.PriceSale</div>
                                                 }
                                             </div>
-                                            <div style="position: absolute; bottom: 0;" class="red_button add_to_cart_button">
-                                                <a href="/chi-tiet-san-pham/@(item.Alias)-p@(item.Id)">Xem chi tiết sản phẩm</a>
-                                                @*<a href="#" class="btnAddToCart" data-id="@item.Id">add to cart</a>*@
-                                            </div>
+                                        </div>
+                                        <div class="red_button add_to_cart_button" style="background-position:bottom">
+                                            <a href="/chi-tiet-san-pham/@(item.Alias)-p@(item.Id)">Xem chi tiết sản phẩm</a>
+                                            @*<a href="#" class="btnAddToCart" data-id="@item.Id">add to cart</a>*@
                                         </div>
                                     </div>
                                 </div>

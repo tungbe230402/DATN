@@ -2,7 +2,7 @@
 @using PagedList.Mvc;
 @using PagedList;
 @{
-    ViewBag.Title = "Danh mục";
+    ViewBag.Title = "đề mục";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -16,7 +16,7 @@
             <a href="~/admin/home" class="nav-link">Trang chủ</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin/category" class="nav-link">Danh mục</a>
+            <a href="/admin/category" class="nav-link">Đề mục</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="/admin/category/add" class="nav-link">Thêm mới</a>
@@ -29,7 +29,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Quản lý danh mục</h1>
+                <h1>Quản lý đề mục</h1>
             </div>
         </div>
     </div><!-- /.container-fluid -->
@@ -41,7 +41,7 @@
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Danh sách danh mục</h3>
+            <h3 class="card-title">danh sách đề mục</h3>
 
             <div class="card-tools">
                 <a href="/admin/category/add" class="btn btn-primary">Thêm mới</a>
@@ -66,8 +66,9 @@
                 <thead>
                     <tr>
                         <th>STT</th>
-                        <th>Tên danh mục</th>
+                        <th>Tên đề mục</th>
                         <th>Thứ tự</th>
+                        <th>Active</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -77,10 +78,14 @@
                         var i = ((ViewBag.page - 1) * ViewBag.Pagesize) + 1;
                         foreach (var item in Model)
                         {
+                            var strCheckActive = item.IsActive ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
                             <tr id="trow_@item.Id">
                                 <td>@i</td>
                                 <td>@item.Title</td>
                                 <td>@item.Position</td>
+                                <td>
+                                    <a href="#" data-id="@item.Id" class="btnActive">@Html.Raw(strCheckActive)</a>
+                                </td>
                                 <td>
                                     <a href="/admin/category/edit/@item.Id" class="btn btn-sm btn-primary">Sửa</a>
                                     <a href="#" data-id="@item.Id" class="btn btn-sm btn-danger btnDelete">Xóa</a>
@@ -133,6 +138,27 @@
                             }
                         }
                     });
+                }
+            });
+        });
+
+        $('body').on('click', '.btnActive', function (e) {
+            e.preventDefault();// Ngăn chặn hành vi mặc định của thẻ <a>
+            var btn = $(this);
+            var id = btn.data("id");
+            $.ajax({
+                url: '/admin/Category/IsActive',
+                type: 'POST',
+                data: { id: id },
+                success: function (rs) {
+                    if (rs.success) {
+                        if (rs.isActive) {
+                            btn.html("<i class='fa fa-check text-success'></i>");
+                        }
+                        else {
+                            btn.html("<i class='fas fa-times text-danger'></i>");
+                        }
+                    }
                 }
             });
         });

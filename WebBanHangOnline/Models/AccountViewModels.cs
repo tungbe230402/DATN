@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebBanHangOnline.Models
@@ -110,30 +111,33 @@ namespace WebBanHangOnline.Models
 
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập tài khoản")]
         [Display(Name = "UserName")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập họ tên của bạn")]
         [Display(Name = "FullName")]
         public string FullName { get; set; }
 
+        [Required(ErrorMessage = "Vui lòng nhập số điện thoại")]
+        [RegularExpression(@"^\d{10,11}$", ErrorMessage = "Số điện thoại phải là ký tự số và có độ dài từ 10 đến 11 ký tự")]
+        [Display(Name = "Phone")]
         public string Phone { get; set; }
 
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Vui lòng nhập email")]
+        [EmailAddress(ErrorMessage = "Email của bạn nhập không đúng định dạng")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
+        [StringLength(100, ErrorMessage = "Mật khẩu tối thiểu 6 ký tự", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Mật khẩu không trùng khớp")]
         public string ConfirmPassword { get; set; }
     }
 

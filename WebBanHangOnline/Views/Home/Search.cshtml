@@ -1,0 +1,88 @@
+﻿@model IEnumerable<WebBanHangOnline.Models.EF.Product>
+@using WebBanHangOnline.Common;
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/assets/styles/main_styles.css">
+
+<style>
+    /* Tạo khoảng cách giữa các sản phẩm */
+    .product-item {
+        margin-bottom: 100px; /* Khoảng cách giữa các sản phẩm */
+        margin-right: 20px; /* Khoảng cách bên phải giữa các sản phẩm cùng hàng */
+    }
+
+    /* Tạo khoảng cách giữa header và phần sản phẩm */
+    .product-grid {
+        margin-top: 100px; /* Khoảng cách giữa header và sản phẩm */
+        margin-bottom: 100px;
+        margin-left: 50px;
+        margin-right: 180px; /* Đảm bảo không bị che mất ở bên phải */
+        display: flex; /* Sử dụng flexbox để tạo khoảng cách giữa các sản phẩm cùng hàng */
+        flex-wrap: wrap; /* Cho phép các sản phẩm xuống dòng khi không đủ không gian */
+    }
+
+    /* Để căn chỉnh các sản phẩm trong cùng một hàng, bạn có thể điều chỉnh kích thước của .product-item */
+    .product-item {
+        flex: 0 1 calc(33.333% - 20px); /* Điều chỉnh kích thước sản phẩm, tính toán khoảng cách */
+        box-sizing: border-box; /* Đảm bảo padding và margin không ảnh hưởng đến kích thước */
+    }
+
+</style>
+
+<div class="row">
+    <div class="col">
+        <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
+            @if (Model != null && Model.Any())
+            {
+                <div class="product-grid">
+                    @foreach (var item in Model)
+                    {
+                        var strImg = "";
+                        var img = item.ProductImage.FirstOrDefault(x => x.IsDefault);
+                        if (img != null)
+                        {
+                            strImg = img.Image;
+                        }
+                        var wishlist = item.Wishlist.FirstOrDefault(x => x.UserName == User.Identity.Name);
+                        var isWishlist = wishlist != null;
+
+                        <div class="product-item @item.ProductCategory.Alias">
+                            <div class="product discount product_filter">
+                                <div class="product_image">
+                                    <img src="@strImg" alt="@item.Title">
+                                </div>
+                                <!-- Code yêu thích -->
+                                <div data-id="@item.Id" class="favorite favorite_left @(isWishlist ? "active" : "")"></div>
+                                <!-- Code giá -->
+                                @if (item.PriceSale > 0)
+                                {
+                                    <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>Sale</span></div>
+                                }
+                                <div class="product_info">
+                                    <h6 class="product_name"><a href="/chi-tiet-san-pham/@(item.Alias)-p@(item.Id)">@item.Title</a></h6>
+                                    @if (item.PriceSale == null || item.PriceSale == 0)
+                                    {
+                                        <div class="product_price">@Common.FormatNumber(item.Price, 0)</div>
+                                        <div style="display:none;" class="in_product_price">@item.Price</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="product_price">@Common.FormatNumber(item.PriceSale, 0)<span>@Common.FormatNumber(item.Price, 0)</span></div>
+                                        <div style="display:none;" class="in_product_price">@item.PriceSale</div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="red_button add_to_cart_button" style="background-position:bottom">
+                                <a href="/chi-tiet-san-pham/@(item.Alias)-p@(item.Id)">Xem chi tiết sản phẩm</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
